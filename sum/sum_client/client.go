@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"go-grpc/greet/greetpb"
+	"go-grpc/sum/sumpb"
 	"log"
 
 	"google.golang.org/grpc"
@@ -16,21 +16,20 @@ func main() {
 	}
 	defer conn.Close()
 	// request via connection
-	c := greetpb.NewGreetServiceClient(conn)
+	c := sumpb.NewSumServiceClient(conn)
 	doUnary(c)
 
 }
 
-func doUnary(c greetpb.GreetServiceClient) {
-	req := &greetpb.GreetingRequest{
-		Greeting: &greetpb.Greeting{
-			FirstName: "James",
-			LastName:  "Tan",
-		},
+func doUnary(c sumpb.SumServiceClient) {
+	req := &sumpb.SumRequest{
+		A: 32,
+		B: 16,
 	}
-	res, err := c.Greet(context.Background(), req)
+
+	res, err := c.Sum(context.Background(), req)
 	if err != nil {
 		log.Fatalf("error while calling Greeting RPC %v", err)
 	}
-	log.Printf("Response from Greet: %v", res.GetResult())
+	log.Printf("Response from Greet: %v", res.GetSum())
 }

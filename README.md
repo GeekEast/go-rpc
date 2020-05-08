@@ -34,5 +34,6 @@ protoc greet/greetpb/greet.proto --go_out=plugins=grpc:.
 ```
 
 ### Practice
-- no `*` and `&` for interface
-- `*` and `&` for `struct` (by now)
+- no `*` and `&` prefix for interface
+- `*` and `&` is only for `struct` (by now)
+- paramter requires an `interface`, you need always **pass a pointer**

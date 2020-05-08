@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"go-grpc/greet/greetpb"
+	"go-grpc/sum/sumpb"
 	"log"
 	"net"
 
@@ -14,14 +14,13 @@ import (
 type server struct {
 }
 
-// implement GreetServiceServer interface
-func (s server) Greet(ctx context.Context, req *greetpb.GreetingRequest) (*greetpb.GreetResponse, error) {
-	firstName := req.Greeting.GetFirstName()
-	lastName := req.Greeting.GetLastName()
-	res := &greetpb.GreetResponse{
-		Result: "hello " + firstName + " " + lastName,
-	}
-	return res, nil
+func (*server) Sum(ctx context.Context, req *sumpb.SumRequest) (*sumpb.SumResponse, error) {
+	a := req.GetA()
+	b := req.GetB()
+	sum := a + b
+	return &sumpb.SumResponse{
+		Sum: sum,
+	}, nil
 }
 
 func main() {
@@ -33,7 +32,8 @@ func main() {
 	}
 	// create grpc server
 	s := grpc.NewServer()
-	greetpb.RegisterGreetServiceServer(s, &server{})
+
+	sumpb.RegisterSumServiceServer(s, &server{})
 
 	// serve gRPC at listener
 	if err := s.Serve(lis); err != nil {
