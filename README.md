@@ -32,3 +32,7 @@ service GreetService {}
 ```sh
 protoc greet/greetpb/greet.proto --go_out=plugins=grpc:.
 ```
+
+### Practice
+- no `*` and `&` for interface
+- `*` and `&` for `struct` (by now)

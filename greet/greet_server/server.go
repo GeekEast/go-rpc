@@ -1,6 +1,8 @@
 package main
 
 import (
+	"context"
+	"fmt"
 	"go-grpc/greet/greetpb"
 	"log"
 	"net"
@@ -8,10 +10,22 @@ import (
 	"google.golang.org/grpc"
 )
 
+// declare server
 type server struct {
 }
 
+// implement GreetServiceServer interface
+func (s server) Greet(ctx context.Context, req *greetpb.GreetingRequest) (*greetpb.GreetResponse, error) {
+	firstName := req.Greeting.GetFirstName()
+	lastName := req.Greeting.GetLastName()
+	res := &greetpb.GreetResponse{
+		Result: "hello " + firstName + " " + lastName,
+	}
+	return res, nil
+}
+
 func main() {
+	fmt.Println("Server running at 50051")
 	// create listener
 	lis, err := net.Listen("tcp", "0.0.0.0:50051")
 	if err != nil {
