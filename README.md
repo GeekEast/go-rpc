@@ -36,3 +36,6 @@ protoc greet/greetpb/greet.proto --go_out=plugins=grpc:.
 ### Practice
 - no `*` and `&` for interface
 - `*` and `&` for `struct` (by now)
+
+### References
+- [gRPC](https://grpc.io/docs/guides/)
