@@ -1,4 +1,4 @@
-### Install
+## Install
 - **Golang** `go mod init go-rpc`
 ```sh
 # ~/.zshrc
@@ -18,7 +18,7 @@ go get -u google.golang.org/grpc
 go get -u github.com/golang/protobuf/protoc-gen-go
 ```
 
-### Protocol Buffers
+## Protocol Buffers
 - the default method of serializing structured data in `gRPC`
 ### What for
 - serializing structured data
@@ -85,7 +85,7 @@ message Person {
     string email = 2;
 }
 ```
-### Proto3
+## Proto3
 > use this to generate gRPC `service` code for both **server-side** and **client-side** based on protocol (not the server code!)
 - First `.proto`
 ```proto3
@@ -100,11 +100,11 @@ service GreetService {}
 protoc greet/greetpb/greet.proto --go_out=plugins=grpc:.
 ```
 
-### Practice
+## Practice
 - no `*` and `&` for interface
 - `*` and `&` for `struct` (by now)
 
-### References
+## References
 - [gRPC](https://grpc.io/docs/guides/)
 - [gRPC to Typescript](https://github.com/improbable-eng/ts-protoc-gen)
 - [Understand Protocol Buffer](https://medium.com/better-programming/understanding-protocol-buffers-43c5bced0d47)
